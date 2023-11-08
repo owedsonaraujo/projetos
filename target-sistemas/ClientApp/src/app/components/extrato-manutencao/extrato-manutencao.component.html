@@ -1,0 +1,62 @@
+<div class="container-fluid p-5">
+
+  <h3>Incluir/Alterar lançamento</h3>
+  <hr />
+
+  <form class="mt-4">
+    <table class="tb-form">
+      <tr>
+        <td colspan="3">
+          <mat-form-field class="form-field">
+            <mat-label>Descricao</mat-label>
+            <input [(ngModel)]="this.dataSend.descricao" matInput [ngModelOptions]="{ standalone: true }" [disabled]="this.isUpdate">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label>Valor</mat-label>
+            <input [(ngModel)]="this.dataSend.valor" matInput [ngModelOptions]="{ standalone: true }">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="pickerStart" [(ngModel)]="this.dataSend.data" [ngModelOptions]="{ standalone: true }">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label>Status</mat-label>
+            <mat-select [value]="this.dataSend.status"  [disabled]="this.isUpdate">
+              <mat-option value="Válido">Válido</mat-option>
+              <mat-option value="Cancelado">Cancelado</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label>Avulso</mat-label>
+            <mat-select [(ngModel)]="dataSend.avulso" [ngModelOptions]="{ standalone: true }" [disabled]="this.isUpdate">
+              <mat-option [value]="true">Sim</mat-option>
+              <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button *ngIf="isUpdate == false" class="float-left btn btn-primary" (click)="this.btnIncluir_click()">Incluir</button>
+          <button *ngIf="isUpdate == true" class="float-left btn btn-warning" (click)="this.btnAtualizar_click()">Atualizar</button>
+        </td>
+      </tr>
+    </table>
+
+  </form>
+
+</div>

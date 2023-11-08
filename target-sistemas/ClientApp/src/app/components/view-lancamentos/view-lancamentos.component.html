@@ -1,0 +1,97 @@
+<table class="w-100 table table-striped">
+  <tr>
+    <td>
+      <label class="text-dark">Total lançamentos </label>
+      <br/>
+      <h1><b>{{this.totalLancamentos()}}</b></h1>
+    </td>
+  </tr>
+</table>
+<hr />
+<table class="w-100 table table-striped">
+  <tr>
+    <td>
+      <mat-form-field>
+        <mat-label>Início</mat-label>
+        <input matInput [matDatepicker]="pickerStart" [(ngModel)]="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Final</mat-label>
+        <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </td>
+    <td>
+      <button class="float-right btn btn-warning bg-warning" (click)="this.loadLancamentos()">Aplicar filtros</button>
+    </td>
+  </tr>
+</table>
+<hr />
+
+<table class="w-100 table table-striped" mat-table [dataSource]="this.dataSource">
+ 
+  <ng-container matColumnDef="data">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Data</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{this.formatarData(element.data)}}</label>
+    </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="id">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Id</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{element.id}}</label>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="descricao">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Descrição</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{element.descricao}}</label>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="valor">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Valor</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{this.formatarMoeda(element.valor)}}</label>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="avulso">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Avulso</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{element.avulso ? 'Sim': 'Não'}}</label>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th scope="row" mat-header-cell *matHeaderCellDef><label class="my-lb-reader">Status</label></th>
+    <td mat-cell *matCellDef="let element">
+      <label class="my-lb-cell">{{element.status}}</label>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th scope="row" mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <table>
+        <tr>
+          <td class="p-1">
+            <button class="float-left btn btn-dark" (click)="this.btnAlterar_click(element)">Alterar</button>
+          </td>
+          <td *ngIf="element.status == 'Válido'" class="p-1">
+            <button class="float-left btn btn-warning" (click)="this.btnCancelar_click(element.id)">Cancelar</button>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr [id]="'extrato_'+row.id" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

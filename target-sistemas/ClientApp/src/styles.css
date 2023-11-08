@@ -1,0 +1,29 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* You can add global styles to this file, and also import other style files */
+label {
+    padding-bottom: 0px;
+}
+
+label.my-lb-cell {
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+label.my-lb-reader {
+    border: 1px solid rgba(0, 0, 0, .2);
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #808080;
+    border-radius: 4px;
+}
+
+table.tb-form tr td{
+    padding: 5px;
+}
+
+.form-field{
+    width: 100%;
+}
